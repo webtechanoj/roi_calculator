@@ -1,0 +1,174 @@
+<html>
+<head>
+  <title>ROI Calculator </title>
+
+  <script src="  http://code.jquery.com/jquery-1.7.2.min.js"></script><br />
+  <link rel='stylesheet'href="style.css" type="text/css" media="all" > </link>
+
+</head>
+<body>
+  <table class="calculator">
+<thead>
+<tr>
+<th colspan="2" align="center">Investment Property Only</th>
+<th colspan="2" align="center">Investment Property &amp; Granny Flat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="light">Cost of Buying an Investment</td>
+<td class="dark" align="right"><input type="text" name="costofbuying1" value="500000" class="calculate"></td>
+<td class="light">Cost of Buying an Investment Property</td>
+<td class="dark" align="right"><input type="text" name="costofbuying2" value="500000" class="calculate"></td>
+</tr>
+<tr>
+<td colspan="2" class="empty">&nbsp;</td>
+<td class="light">Cost of Building a Granny Flat</td>
+<td class="dark" align="right"><input type="text" name="costofbuildinggf2" value="100000" class="calculate"></td>
+</tr>
+<tr>
+<td class="light">Cost of Total Investment</td>
+<td class="dark" align="right"><input type="text" name="costofbuilding1" value="500,000" class="calculated" readonly="readonly"></td>
+<td class="light">Cost of Total Investment</td>
+<td class="dark" align="right"><input type="text" name="costofbuilding2" value="600,000" class="calculated" readonly="readonly"></td>
+</tr>
+<tr>
+<td class="light">Rental Income per week – Main Dwelling</td>
+<td class="dark" align="right"><input type="text" name="weeklyrentalincomemd1" value="550" class="calculate"></td>
+<td class="light">Rental Income per week – Main Dwelling</td>
+<td class="dark" align="right"><input type="text" name="weeklyrentalincomemd2" value="550" class="calculate"></td>
+</tr>
+<tr>
+<td colspan="2" class="empty">&nbsp;</td>
+<td class="light">Rental income per week – Granny Flat</td>
+<td class="dark" align="right"><input type="text" name="rentalincomeg2" value="380" class="calculate"></td>
+</tr>
+<tr>
+<td class="light">Total Income per week</td>
+<td class="dark" align="right"><input type="text" name="totalincome1" value="550" class="calculated" readonly="readonly"></td>
+<td class="light">Total Income per week</td>
+<td class="dark" align="right"><input type="text" name="totalincome2" value="930" class="calculated" readonly="readonly"></td>
+</tr>
+<tr>
+<td class="light">Rental Income per year – Main Dwelling</td>
+<td class="dark" align="right"><input type="text" name="annualrentalincomemd1" value="28,600" class="calculated" readonly="readonly"></td>
+<td class="light">Rental Income per year – Main Dwelling</td>
+<td class="dark" align="right"><input type="text" name="annualrentalincomemd2" value="28,600" class="calculated" readonly="readonly"></td>
+</tr>
+<tr>
+<td colspan="2" class="empty">&nbsp;</td>
+<td class="light">Rental Income per year – Granny Flat</td>
+<td class="dark" align="right"><input type="text" name="annualrentalincomegf2" value="19,760" class="calculated" readonly="readonly"></td>
+</tr>
+<tr>
+<td class="light">Total Rental Income per Year</td>
+<td class="dark" align="right"><input type="text" name="totalrentalincome1" value="28,600" class="calculated" readonly="readonly"></td>
+<td class="light">Total Rental Income per Year</td>
+<td class="dark" align="right"><input type="text" name="totalrentalincome2" value="48,360" class="calculated" readonly="readonly"></td>
+</tr>
+<tr>
+<td class="light">ROI – on Investment Property</td>
+<td class="dark" align="right"><input type="text" name="roi1" value="5.7%" class="calculated" readonly="readonly"></td>
+<td class="light">ROI – on both Properties</td>
+<td class="dark" align="right"><input type="text" name="roi2" value="8.1%" class="calculated" readonly="readonly"></td>
+</tr>
+<tr>
+<td colspan="2" class="empty">&nbsp;</td>
+<td class="light">ROI – on Granny Flat alone</td>
+<td class="dark" align="right"><input type="text" name="roigf2" value="19.8%" class="calculated" readonly="readonly"></td>
+</tr>
+<tr>
+<td class="light">Current Mortage Interest Rate (as a %)</td>
+<td class="dark" align="right"><input type="text" name="interestrate1" value="7.5%" class="calculate"></td>
+<td class="light">Current Mortgage Interest Rate (as a %)</td>
+<td class="dark" align="right"><input type="text" name="interestrate2" value="7.5%" class="calculate"></td>
+</tr>
+<tr>
+<td class="light">Annual Repayments on Total Investment</td>
+<td class="dark" align="right"><input type="text" name="annualrepayments1" value="37,500" class="calculated" readonly="readonly"></td>
+<td class="light">Annual Repayments on Total Investment</td>
+<td class="dark" align="right"><input type="text" name="annualrepayments2" value="45,000" class="calculated" readonly="readonly"></td>
+</tr>
+<tr>
+<td class="light">Net Annual Return on Investment</td>
+<td class="dark" align="right"><input type="text" name="netannualroi1" value="-8,900" class="calculated" readonly="readonly"></td>
+<td class="light">Net Annual Return on Investment</td>
+<td class="dark" align="right"><input type="text" name="netannualroi2" value="3,360" class="calculated" readonly="readonly"></td>
+</tr>
+<tr>
+<td colspan="2" class="redtext" id="col1gearing">This is a Negative Geared Investment</td>
+<td colspan="2" class="greentext" id="col2gearing">This is a Positive Geared Investment</td>
+</tr>
+</tbody>
+</table>
+<div id="left-col">
+</div><style>
+#li {
+	margin-left: 10px;
+	font-weight: 600;
+
+  }
+#head {
+	font-weight: 600;
+
+  }
+#centerT {
+	width: 100%;
+	margin-left: 22px;
+}
+
+#blktext {
+	color: #000000;
+}
+</style>
+
+</div>
+<script>
+	$(document).ready(function() {
+		/* Finance calculator Starts here*/
+		$.fn.digits = function(){
+			return this.each(function(){ $(this).val( $(this).val().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") ); })
+		}
+		//column1
+		$('input[name="interestrate1"],input[name="weeklyrentalincomemd1"],input[name="costofbuying1"]').change(function() {
+			this.value = this.value.replace(/[^0-9\.\%]/g,'');
+			$('input[name="costofbuilding1"]').val($('input[name="costofbuying1"]').val().replace(/,/g,'')).digits();
+			$('input[name="annualrentalincomemd1"]').val($('input[name="weeklyrentalincomemd1"]').val().replace(/,/g,'')*52).digits();
+			$('input[name="totalrentalincome1"]').val($('input[name="weeklyrentalincomemd1"]').val().replace(/,/g,'')*52).digits();
+			$('input[name="roi1"]').val(($('input[name="totalrentalincome1"]').val().replace(/,/g,'')/$('input[name="costofbuying1"]').val().replace(/,/g,'')*100).toFixed(1)+"%");
+			$('input[name="annualrepayments1"]').val($('input[name="costofbuying1"]').val().replace(/,/g,'')*$('input[name="interestrate1"]').val().replace("%","")/100).digits();
+			$('input[name="netannualroi1"]').val($('input[name="totalrentalincome1"]').val().replace(/,/g,'')-$('input[name="annualrepayments1"]').val().replace(/,/g,'')).digits();
+			if(parseFloat($('input[name="netannualroi1"]').val().replace(/,/g,''))<0){
+				$('#col1gearing').text('This is a Negative Geared Investment');
+				$('#col1gearing').attr('class', 'redtext');
+				}else{
+				$('#col1gearing').text('This is a Positive Geared Investment');
+				$('#col1gearing').attr('class', 'greentext');
+			}
+		});
+		//column 2
+		$('input[name="costofbuying2"],input[name="costofbuildinggf2"],input[name="weeklyrentalincomemd2"],input[name="rentalincomeg2"],input[name="interestrate2"]').change(function() {
+			this.value = this.value.replace(/[^0-9\.\%]/g,'');
+			$('input[name="costofbuilding2"]').val(parseFloat($('input[name="costofbuying2"]').val().replace(/,/g,''))+parseFloat($('input[name="costofbuildinggf2"]').val().replace(/,/g,''))).digits();
+			$('input[name="totalincome2"]').val(parseFloat($('input[name="weeklyrentalincomemd2"]').val().replace(/,/g,''))+parseFloat($('input[name="rentalincomeg2"]').val().replace(/,/g,''))).digits();
+			$('input[name="annualrentalincomemd2"]').val($('input[name="weeklyrentalincomemd2"]').val().replace(/,/g,'')*52);
+			$('input[name="annualrentalincomegf2"]').val($('input[name="rentalincomeg2"]').val().replace(/,/g,'')*52).digits();
+			$('input[name="totalrentalincome2"]').val(parseFloat($('input[name="annualrentalincomemd2"]').val().replace(/,/g,''))+parseFloat($('input[name="annualrentalincomegf2"]').val().replace(/,/g,''))).digits();
+			$('input[name="roi2"]').val(($('input[name="totalrentalincome2"]').val().replace(/,/g,'')/$('input[name="costofbuilding2"]').val().replace(/,/g,'')*100).toFixed(1)+"%");
+			$('input[name="roigf2"]').val(($('input[name="annualrentalincomegf2"]').val().replace(/,/g,'')/$('input[name="costofbuildinggf2"]').val().replace(/,/g,'')*100).toFixed(1)+"%");
+			$('input[name="annualrepayments2"]').val($('input[name="costofbuilding2"]').val().replace(/,/g,'')*$('input[name="interestrate2"]').val().replace("%","")/100).digits();
+			$('input[name="netannualroi2"]').val(parseFloat($('input[name="totalrentalincome2"]').val().replace(/,/g,''))-parseFloat($('input[name="annualrepayments2"]').val().replace(/,/g,''))).digits();
+			if(parseFloat($('input[name="netannualroi2"]').val().replace(/,/g,''))<0){
+				$('#col2gearing').text('This is a Negative Geared Investment');
+				$('#col2gearing').attr('class', 'redtext');
+				}else{
+				$('#col2gearing').text('This is a Positive Geared Investment');
+				$('#col2gearing').attr('class', 'greentext');
+			}
+		});
+		/* Finance calculator Ends here*/
+	});
+</script>
+
+</body>
+</html>
